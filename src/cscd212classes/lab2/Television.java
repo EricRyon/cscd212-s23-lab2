@@ -9,11 +9,9 @@ public class Television implements Comparable<Television> {
 
     public Television(final String make, final String model, final boolean smart, final int screenSize, final int resolution) {
         if (make == null || make.isEmpty() || model == null || model.isEmpty() ||screenSize < 32 || resolution < 720) {
-            throw new IllegalArgumentException("bad params in EVC");
+            throw new IllegalArgumentException("Invalid parameter in constructor");
         }
-        if (resolution == 2160) {
-            this.fourK = true;
-        }
+        this.fourK = (resolution == 2160);
         this.make = make;
         this.model = model;
         this.smart = smart;
@@ -36,12 +34,7 @@ public class Television implements Comparable<Television> {
         return model;
     }
     public String toString() {
-        if (resolution == 2160) {
-            return (make + "-" + model + ", " + screenSize + " inch smart tv with 4K resolution");
-        }
-        else {
-            return (make + "-" + model + ", " + screenSize + " inch tv with " + resolution + " resolution");
-        }
+        return (make+"-"+model+", "+screenSize+" inch "+(smart?"smart ":"")+"tv with "+(fourK?"4K":resolution)+" resolution");
     }
     @Override
     public boolean equals(final Object o) {
@@ -64,14 +57,14 @@ public class Television implements Comparable<Television> {
     @Override
     public int compareTo(final Television another) {
         if (another == null) {
-            throw new IllegalArgumentException("bad params compareTo");
+            throw new IllegalArgumentException("null parameter in the compareTo method");
         }
         int x = this.make.compareTo(another.make);
         if (x == 0) {
             x = this.model.compareTo(another.model);
         }
         if (x == 0) {
-            x = this.resolution - another.resolution;
+            x = this.screenSize - another.screenSize;
         }
         return x;
     }
