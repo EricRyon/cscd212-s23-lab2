@@ -1,6 +1,6 @@
 package cscd212comparators.lab2;
 
-import java.util.*;
+import java.util.Comparator;
 import cscd212classes.lab2.Television;
 
 public class TelevisionResolutionMakeDescendingComparator implements Comparator<Television> {
